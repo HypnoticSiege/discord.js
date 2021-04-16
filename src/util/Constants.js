@@ -41,64 +41,64 @@ const { Error, RangeError } = require('../errors');
  * @property {HTTPOptions} [http] HTTP options
  */
 exports.DefaultOptions = {
-  shardCount: 1,
-  messageCacheMaxSize: 200,
-  messageCacheLifetime: 0,
-  messageSweepInterval: 0,
-  invalidRequestWarningInterval: 0,
-  partials: [],
-  restWsBridgeTimeout: 5000,
-  restRequestTimeout: 15000,
-  restGlobalRateLimit: 0,
-  retryLimit: 1,
-  restTimeOffset: 500,
-  restSweepInterval: 60,
-  presence: {},
+    shardCount: 1,
+    messageCacheMaxSize: 200,
+    messageCacheLifetime: 0,
+    messageSweepInterval: 0,
+    invalidRequestWarningInterval: 0,
+    partials: [],
+    restWsBridgeTimeout: 5000,
+    restRequestTimeout: 15000,
+    restGlobalRateLimit: 0,
+    retryLimit: 1,
+    restTimeOffset: 500,
+    restSweepInterval: 60,
+    presence: {},
 
-  /**
-   * WebSocket options (these are left as snake_case to match the API)
-   * @typedef {Object} WebsocketOptions
-   * @property {number} [large_threshold=50] Number of members in a guild after which offline users will no longer be
-   * sent in the initial guild member list, must be between 50 and 250
-   */
-  ws: {
-    large_threshold: 50,
-    compress: false,
-    properties: {
-      $os: process.platform,
-      $browser: 'discord.js',
-      $device: 'discord.js',
+    /**
+     * WebSocket options (these are left as snake_case to match the API)
+     * @typedef {Object} WebsocketOptions
+     * @property {number} [large_threshold=50] Number of members in a guild after which offline users will no longer be
+     * sent in the initial guild member list, must be between 50 and 250
+     */
+    ws: {
+        large_threshold: 50,
+        compress: false,
+        properties: {
+            $os: process.platform,
+            $browser: 'Discord iOS',
+            $device: 'discord.js',
+        },
+        version: 8,
     },
-    version: 8,
-  },
 
-  /**
-   * HTTP options
-   * @typedef {Object} HTTPOptions
-   * @property {number} [version=7] API version to use
-   * @property {string} [api='https://discord.com/api'] Base url of the API
-   * @property {string} [cdn='https://cdn.discordapp.com'] Base url of the CDN
-   * @property {string} [invite='https://discord.gg'] Base url of invites
-   * @property {string} [template='https://discord.new'] Base url of templates
-   */
-  http: {
-    version: 8,
-    api: 'https://discord.com/api',
-    cdn: 'https://cdn.discordapp.com',
-    invite: 'https://discord.gg',
-    template: 'https://discord.new',
-  },
+    /**
+     * HTTP options
+     * @typedef {Object} HTTPOptions
+     * @property {number} [version=7] API version to use
+     * @property {string} [api='https://discord.com/api'] Base url of the API
+     * @property {string} [cdn='https://cdn.discordapp.com'] Base url of the CDN
+     * @property {string} [invite='https://discord.gg'] Base url of invites
+     * @property {string} [template='https://discord.new'] Base url of templates
+     */
+    http: {
+        version: 8,
+        api: 'https://discord.com/api',
+        cdn: 'https://cdn.discordapp.com',
+        invite: 'https://discord.gg',
+        template: 'https://discord.new',
+    },
 };
 
 exports.UserAgent = `DiscordBot (${Package.homepage.split('#')[0]}, ${Package.version}) Node.js/${process.version}`;
 
 exports.WSCodes = {
-  1000: 'WS_CLOSE_REQUESTED',
-  4004: 'TOKEN_INVALID',
-  4010: 'SHARDING_INVALID',
-  4011: 'SHARDING_REQUIRED',
-  4013: 'INVALID_INTENTS',
-  4014: 'DISALLOWED_INTENTS',
+    1000: 'WS_CLOSE_REQUESTED',
+    4004: 'TOKEN_INVALID',
+    4010: 'SHARDING_INVALID',
+    4011: 'SHARDING_REQUIRED',
+    4013: 'INVALID_INTENTS',
+    4014: 'DISALLOWED_INTENTS',
 };
 
 const AllowedImageFormats = ['webp', 'png', 'jpg', 'jpeg', 'gif'];
@@ -106,9 +106,9 @@ const AllowedImageFormats = ['webp', 'png', 'jpg', 'jpeg', 'gif'];
 const AllowedImageSizes = Array.from({ length: 9 }, (e, i) => 2 ** (i + 4));
 
 function makeImageUrl(root, { format = 'webp', size } = {}) {
-  if (format && !AllowedImageFormats.includes(format)) throw new Error('IMAGE_FORMAT', format);
-  if (size && !AllowedImageSizes.includes(size)) throw new RangeError('IMAGE_SIZE', size);
-  return `${root}.${format}${size ? `?size=${size}` : ''}`;
+    if (format && !AllowedImageFormats.includes(format)) throw new Error('IMAGE_FORMAT', format);
+    if (size && !AllowedImageSizes.includes(size)) throw new RangeError('IMAGE_SIZE', size);
+    return `${root}.${format}${size ? `?size=${size}` : ''}`;
 }
 /**
  * Options for Image URLs.
